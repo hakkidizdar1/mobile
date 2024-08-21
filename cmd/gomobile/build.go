@@ -310,6 +310,7 @@ func goCmdAt(at string, subcmd string, srcs []string, env []string, args ...stri
 		cmd.Args = append(cmd.Args, "-tiny")
 		cmd.Args = append(cmd.Args, "-literals")
 		cmd.Args = append(cmd.Args, "build")
+		cmd.Env = os.Environ()
 	}
 	tags := buildTags
 	if len(tags) > 0 {
