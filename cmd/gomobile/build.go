@@ -305,6 +305,12 @@ func goCmd(subcmd string, srcs []string, env []string, args ...string) error {
 
 func goCmdAt(at string, subcmd string, srcs []string, env []string, args ...string) error {
 	cmd := exec.Command("go", subcmd)
+	if subcmd == "build" {
+		cmd = exec.Command("garble")
+		cmd.Args = append(cmd.Args, "-tiny")
+		cmd.Args = append(cmd.Args, "-literals")
+		cmd.Args = append(cmd.Args, "build")
+	}
 	tags := buildTags
 	if len(tags) > 0 {
 		cmd.Args = append(cmd.Args, "-tags", strings.Join(tags, ","))
